@@ -8,13 +8,14 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
+HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 @allure.feature('Test Baidu WebUI')
 class ISelenium(unittest.TestCase):
     # 读入配置文件
     def get_config(self):
         config = configparser.ConfigParser()
-        config.read(os.path.join(os.environ['HOME'], 'iselenium.ini'))
+        config.read(os.path.join(HOME_DIR, 'iselenium.ini'))
         return config
 
     def tearDown(self):
@@ -69,3 +70,5 @@ class ISelenium(unittest.TestCase):
         print(f'搜索关键词~{search_keyword}')
         time.sleep(5)
         self.assertTrue(f'{search_keyword}' in self.driver.title, msg=f'{testcase_name}校验点 pass')
+
+
