@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 
 HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 @allure.feature('Test Baidu WebUI')
 class ISelenium(unittest.TestCase):
     # 读入配置文件
@@ -36,8 +37,9 @@ class ISelenium(unittest.TestCase):
             print('使用无界面方式运行')
             chrome_options.add_argument("--headless")
 
-        self.driver = webdriver.Chrome(executable_path=config.get('driver', 'chrome_driver'),
-                                       options=chrome_options)
+        # self.driver = webdriver.Chrome(executable_path=config.get('driver', 'chrome_driver'),
+        #                                options=chrome_options)
+        self.driver = webdriver.Remote(command_executor='http://shifeng.online:5001/wd/hub', options=chrome_options)
 
     @allure.story('Test key word 今日头条')
     def test_webui_1(self):
@@ -70,5 +72,3 @@ class ISelenium(unittest.TestCase):
         print(f'搜索关键词~{search_keyword}')
         time.sleep(5)
         self.assertTrue(f'{search_keyword}' in self.driver.title, msg=f'{testcase_name}校验点 pass')
-
-
