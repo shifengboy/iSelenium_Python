@@ -37,9 +37,9 @@ class ISelenium(unittest.TestCase):
             print('使用无界面方式运行')
             chrome_options.add_argument("--headless")
 
-        # self.driver = webdriver.Chrome(executable_path=config.get('driver', 'chrome_driver'),
-        #                                options=chrome_options)
-        self.driver = webdriver.Remote(command_executor='http://shifeng.online:5001/wd/hub', options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path=config.get('driver', 'chrome_driver'),
+                                       options=chrome_options)
+        # self.driver = webdriver.Remote(command_executor='http://shifeng.online:5001/wd/hub', options=chrome_options)
 
     @allure.story('Test key word 今日头条')
     def test_webui_1(self):
